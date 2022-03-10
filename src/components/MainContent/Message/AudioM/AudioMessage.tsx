@@ -1,42 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-// import styles from "./AudioMessage.module.scss";
-// import WaveSurfer from "react-wavesurfer.js";
+import React from "react";
+import { useReactMediaRecorder } from "react-media-recorder";
 
-// const AudioMessage = () => {
-//   //   const waveformRef = useRef(null);
-//   //   const [position, setPosition] = useState(0);
-//   //   const [muted, setMuted] = useState(false);
-//   //   console.log(waveformRef);
+const AudioMessage: React.FC = () => {
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ audio: true });
+  return (
+    <div>
+      <p>{status}</p>
+      <button onClick={startRecording}>Start Recording</button>
+      <button onClick={stopRecording}>Stop Recording</button>
+      <audio src={mediaBlobUrl!} controls />
+    </div>
+  );
+};
 
-//   //   useEffect(() => {
-//   //     if (waveformRef.current) {
-//   //       const wavesurfer = WaveSurfer.create({
-//   //         container: waveformRef.current,
-//   //       });
-//   //     }
-//   //   }, []);
-
-//   //   return <div ref={waveformRef}></div>;
-
-//   const [position, setPosition] = useState(0);
-//   const [muted, setMuted] = useState(false);
-
-//   const handlePositionChange = (position: number) => {
-//     /* ... */
-//   };
-
-//   const onReadyHandler = () => console.log("done loading!");
-
-//   return (
-//     <WaveSurfer
-//       src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
-//       //   position={position}
-//       onPositionChange={handlePositionChange}
-//       onReady={onReadyHandler}
-//       //   playing={playing}
-//       //   muted={muted}
-//     />
-//   );
-// };
-
-// export default AudioMessage;
+export default AudioMessage;

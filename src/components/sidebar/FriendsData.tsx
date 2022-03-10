@@ -11,6 +11,9 @@ const FriendsData: React.FC = () => {
 
   const { friends } = data;
 
+  console.log(friends, "friends data");
+  
+
   useEffect(() => {
     getFriends && getFriends();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -46,7 +46,9 @@ export const GlobalProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(AddReducers, initialState);
   // const [hideProfileDrop, setHideProfileDrop] = useState<boolean>(true);
 
-  console.log("message....", state.showMessages);
+  // console.log("message....", state.showMessages);
+
+  // console.log("tokenss", initialState.accessToken);
 
   const getUser = (data: { user: User; accessToken: string }) => {
     dispatch({
@@ -285,6 +287,8 @@ export const GlobalProvider = ({ children }: any) => {
       payload: friend,
     });
   };
+
+  console.log(state, "state data")
 
   return (
     <GlobalStateContext.Provider

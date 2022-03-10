@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ spinner }) => {
     return document.body.classList.toggle(`${styles.darkMode}`);
   };
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.email) {
       focusPoint.current!.style.border = "1.5px solid red";
@@ -118,32 +118,35 @@ const Login: React.FC<LoginProps> = ({ spinner }) => {
       <h2>Login</h2>
       {showError && <p className={styles["error-class"]}>{errorMsg}</p>}
       <div className={styles.form}>
-        <div className={styles["format-box"]}>
-          <MdEmail className={styles["email-icon"]} />
-          <input
-            type="email"
-            value={form.email}
-            ref={focusPoint}
-            name="email"
-            onChange={handleChange}
-            placeholder="Email"
-            required
-          />
-        </div>
-        <div className={styles["format-box"]}>
-          <IoIosLock className={styles["lock-pass"]} />
-          <input
-            type="password"
-            value={form.password}
-            ref={focusPoint2}
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles["format-box"]}>
+            <MdEmail className={styles["email-icon"]} />
+            <input
+              type="email"
+              value={form.email}
+              ref={focusPoint}
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
+              required
+            />
+          </div>
 
-        <button onClick={handleSubmit}> Login </button>
+          <div className={styles["format-box"]}>
+            <IoIosLock className={styles["lock-pass"]} />
+            <input
+              type="password"
+              value={form.password}
+              ref={focusPoint2}
+              name="password"
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          <button type="submit"> Login </button>
+        </form>
       </div>
 
       <p>or continue with these social profile</p>

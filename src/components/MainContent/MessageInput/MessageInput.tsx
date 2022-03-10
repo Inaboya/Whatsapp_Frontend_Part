@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import io from "socket.io-client";
 import Pusher from "pusher-js";
 import axios from "axios";
 import styles from "./MessageInput.module.scss";
+import { GlobalStateContext } from "../../../context/GlobalState";
 import { CgAddR } from "react-icons/cg";
 import { AiOutlineAudio, AiOutlineSend } from "react-icons/ai";
 
@@ -17,56 +18,35 @@ interface MessageDataInputs {
   [key: string]: any;
 }
 
-const MessageInput: React.FC = () => {
-  const [socketConnected, setSocketConnected] = useState(false);
-  const [currentChat, setCurrentChat] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [conversations, setConversations] = useState({} as MessageDataInputs);
+const MessageInput: React.FC<MessageDataInputs> = ({ conversations }) => {
 
-  // useEffect(() => {
-  //   socket = io(ENDPOINT);
-  //   socket.emit("setup", user);
-  //   socket.on("connection", () => setSocketConnected(true));
-  // }, []);
+  const { accessToken } = useContext(GlobalStateContext)
+  const [inputs, setInputs] = useState("");
 
-  useEffect(() => {
-    const getChats = async () => {
-      try {
-        const res = await axios.get(
+  console.log(accessToken, "checking for token")
+
+  const sendMessage = async () => {
+    // e.preventDefault();
+
+    try {
+      if (inputs !== "") {
+        await axios.post(
           "http://localhost:3050/api/v1/chats/61fa3f7e3517687c2ad8ec22/messages",
           {
+            text: inputs,
+          }, {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZjk2NmE4YTliZmFjOWEzMGJlNzk3YSIsImlhdCI6MTY0NTk3ODcyNH0.a--rDRdkWYd5r6wkExrw4GKfcFx_tB7aM7yfA7nPXUU`,
-            },
+              Authorization: `Bearer ${accessToken}`
+            }
           }
-        );
-
-        const { data } = res;
-        setConversations(data);
-      } catch (error) {
-        console.log(error);
+        )
+        setInputs("");
       }
-    };
-
-    getChats();
-  }, []);
-
-  useEffect(() => {
-    const pusher = new Pusher("94d55bd3b0ecf1274ef3", {
-      cluster: "eu",
-    });
-
-    const channel = pusher.subscribe("messages");
-    channel.bind("inserted", (data: any) => {
-      alert(JSON.stringify(data));
-    });
-  }, []);
-
-  const handleChange = (e: any) => {
-    setCurrentChat(e.target.value);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   return (
     <div className={styles.message__input}>
       <p> 😊 </p>
@@ -76,12 +56,15 @@ const MessageInput: React.FC = () => {
 
       <input
         type="text"
-        name="message"
-        onChange={handleChange}
-        placeholder="Say Something..."
+        onChange={(e) => setInputs(e.target.value)}
+        value={inputs}
+        placeholder="Type a message"
+        onKeyPress={(e) => {
+          e.key === "Enter" && sendMessage();
+        }}
       />
 
-      <button type="submit">
+      <button onClick={sendMessage} type="submit">
         <AiOutlineSend />
       </button>
 

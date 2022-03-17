@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ spinner }) => {
     return document.body.classList.toggle(`${styles.darkMode}`);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!form.email) {
       focusPoint.current!.style.border = "1.5px solid red";
@@ -118,7 +118,7 @@ const Login: React.FC<LoginProps> = ({ spinner }) => {
       <h2>Login</h2>
       {showError && <p className={styles["error-class"]}>{errorMsg}</p>}
       <div className={styles.form}>
-        <form onSubmit={handleSubmit}>
+
           <div className={styles["format-box"]}>
             <MdEmail className={styles["email-icon"]} />
             <input
@@ -145,8 +145,7 @@ const Login: React.FC<LoginProps> = ({ spinner }) => {
             />
           </div>
 
-          <button type="submit"> Login </button>
-        </form>
+          <button type="submit" onClick={handleSubmit}> Login </button>
       </div>
 
       <p>or continue with these social profile</p>

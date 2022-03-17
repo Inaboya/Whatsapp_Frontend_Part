@@ -12,10 +12,13 @@ const FavoriteFriendsData: React.FC = () => {
     setShowMessages,
     startChat,
     setFriendDetail,
+    addFavoriteFriend,
   } = useContext(GlobalStateContext);
 
   const { favoriteFriendsList } = data;
   // const { favoriteFriendsList } = data;
+
+  console.log(favoriteFriendsList, "favorite friends data");
 
   useEffect(() => {
     getFavoriteFriends && getFavoriteFriends();
@@ -36,10 +39,12 @@ const FavoriteFriendsData: React.FC = () => {
     startChat!(chat);
   }, [chat]);
 
+ 
+
   return (
     <div>
-      {favoriteFriendsList?.favoriteFriendsList.length === 0 ||
-      data === undefined ? (
+      {favoriteFriendsList?.favoriteFriendsList?.length === 0 ||
+      data === undefined || favoriteFriendsList === [] ? (
         <div className={styles.friends__data}>
           <Spinner />
           <h4 style={{ textAlign: "center", fontSize: "16px" }}>
@@ -47,7 +52,7 @@ const FavoriteFriendsData: React.FC = () => {
           </h4>
         </div>
       ) : (
-        favoriteFriendsList?.favoriteFriendsList.map(
+        favoriteFriendsList?.favoriteFriendsList?.map(
           (friend: any, index: string) => {
             return (
               <div
@@ -72,9 +77,13 @@ const FavoriteFriendsData: React.FC = () => {
                 </div>
                 <div className={styles.extra}>
                   <span>05:15pm</span>
-                  <i>
+                  <button
+                    onClick={() =>
+                      addFavoriteFriend && addFavoriteFriend(friend.id)
+                    }
+                  >
                     <BsPinAngle />
-                  </i>
+                  </button>
                 </div>
               </div>
             );

@@ -16,6 +16,7 @@
     "audio-react-recorder": "^1.0.4",
     "axios": "^0.25.0",
     "axios-hooks": "^3.0.1",
+    "emoji-picker-react": "^3.5.1",
     "node": "^17.4.0",
     "pusher": "^5.0.1",
     "pusher-js": "^7.0.6",

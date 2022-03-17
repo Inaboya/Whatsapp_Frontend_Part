@@ -10,11 +10,18 @@ import MessageInput from "../MessageInput/MessageInput";
 import { RiLock2Line } from "react-icons/ri";
 import { GlobalStateContext } from "../../../context/GlobalState";
 
+interface selectedFileType {
+  [key: string]: any;
+}
 
-const Message: React.FC = () => {
+
+const Message: React.FC <selectedFileType> = ({ selectedFile }) => {
   const { accessToken } = useContext(GlobalStateContext)
   const [conversations, setConversations] = useState([] as any);
   const [receiver, setReceiver] = useState(false);
+
+  console.log(selectedFile, "this is the file I selected at message component");
+  
 
   useEffect(() => {
     const getChats = async () => {
@@ -42,23 +49,12 @@ const Message: React.FC = () => {
     };
 
     getChats();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log(conversations, "incoming messages")
+  console.log(conversations, "incoming messages from message component");
 
-  useEffect(() => {
-    const pusher = new Pusher("94d55bd3b0ecf1274ef3", {
-      cluster: "eu",
-    });
-
-    const channel = pusher.subscribe("messages");
-    channel.bind("inserted", (newMessages: any) => {
-      setConversations([...conversations, newMessages]);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(conversations, "incoming conversations");
+  
 
   return (
     <div className={styles.message__container}>
@@ -72,7 +68,7 @@ const Message: React.FC = () => {
         </p>
       </div>
       <div className={styles.messageContainer}>
-        <TextMessage reciever={receiver} conversations={conversations} />
+        <TextMessage reciever={receiver} selectedFile={ selectedFile } setConversations={ setConversations} conversations={conversations} />
 
         {/* <AudioMessage /> */}
       </div>

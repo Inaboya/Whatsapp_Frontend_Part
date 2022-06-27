@@ -1,38 +1,42 @@
-import React from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
-import styles from "./AudioMessage.module.scss";
-import { BsStopFill } from "react-icons/bs";
-import { AiOutlinePlayCircle } from "react-icons/ai";
+import { useEffect, useRef, useState } from "react";
+// import styles from "./AudioMessage.module.scss";
+// import WaveSurfer from "react-wavesurfer.js";
 
-const AudioMessage: React.FC = () => {
-  const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({
-      audio: true,
-    });
-  return (
-    <div className={styles.Audio}>
-      {/* <div className="loader-container">
-        <div className="rectangle-1"></div>
-        <div className="rectangle-2"></div>
-        <div className="rectangle-3"></div>
-        <div className="rectangle-3"></div>
-        <div className="rectangle-2"></div>
-        <div className="rectangle-1"></div>
-      </div> */}
-      {/* <div className={styles.audio__main_div}> */}
-      <audio src={mediaBlobUrl!} controls className={styles.main_audio} />
-      {/* </div> */}
-      <div className={styles.audio_div}>
-        <i onClick={startRecording}>
-          <AiOutlinePlayCircle />
-        </i>
+// const AudioMessage = () => {
+//   //   const waveformRef = useRef(null);
+//   //   const [position, setPosition] = useState(0);
+//   //   const [muted, setMuted] = useState(false);
+//   //   console.log(waveformRef);
 
-        <i onClick={stopRecording}>
-          <BsStopFill />
-        </i>
-      </div>
-    </div>
-  );
-};
+//   //   useEffect(() => {
+//   //     if (waveformRef.current) {
+//   //       const wavesurfer = WaveSurfer.create({
+//   //         container: waveformRef.current,
+//   //       });
+//   //     }
+//   //   }, []);
 
-export default AudioMessage;
+//   //   return <div ref={waveformRef}></div>;
+
+//   const [position, setPosition] = useState(0);
+//   const [muted, setMuted] = useState(false);
+
+//   const handlePositionChange = (position: number) => {
+//     /* ... */
+//   };
+
+//   const onReadyHandler = () => console.log("done loading!");
+
+//   return (
+//     <WaveSurfer
+//       src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
+//       //   position={position}
+//       onPositionChange={handlePositionChange}
+//       onReady={onReadyHandler}
+//       //   playing={playing}
+//       //   muted={muted}
+//     />
+//   );
+// };
+
+// export default AudioMessage;

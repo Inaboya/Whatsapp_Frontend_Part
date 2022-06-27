@@ -11,9 +11,6 @@ const FriendsData: React.FC = () => {
 
   const { friends } = data;
 
-  console.log(friends, "friends data");
-  
-
   useEffect(() => {
     getFriends && getFriends();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,12 +22,13 @@ const FriendsData: React.FC = () => {
     const partner = friends?.friends.filter(
       (active: any) => active._id === friendId
     );
+
     setFriendDetail!(partner[0].friendId);
     setShowMessages!(true);
   };
 
   useEffect(() => {
-    startChat!(chat);
+    chat && startChat!(chat);
   }, [chat]);
 
   // () => console.log("I just clicked me!!!", friend._id)

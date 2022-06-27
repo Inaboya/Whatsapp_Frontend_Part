@@ -34,6 +34,7 @@ export const ChatContextProvider = ({ children }: ChatContextProviderProps) => {
         showAudio,
         setShowAudio,
         hideChatDrop,
+
         setHideChatDrop,
       }}
     >

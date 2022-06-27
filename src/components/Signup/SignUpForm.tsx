@@ -43,7 +43,6 @@ const SignUp: React.FC = (props) => {
   }
 
   if (!loading && !error && data) {
-    console.log(data);
     toast.success("Signed up successfully", {
       toastId: "2",
       position: "top-left",

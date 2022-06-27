@@ -14,6 +14,7 @@ interface reducerState {
   showMessages: boolean;
   currentChat: IChat;
   friendDetail: any;
+  groupDetail: any;
   showProfile?: (value: boolean) => void;
   setShowMessages?: (value: boolean) => void;
   getUser?: (data: { user: User; accessToken: string }) => void;
@@ -26,6 +27,7 @@ interface reducerState {
   removeFavoriteFriend?: (data: any) => void;
   startChat?: (members: string) => void;
   setFriendDetail?: (friend: any) => void;
+  setGroupDetail?: (group: any) => void;
 }
 
 const initialState: reducerState = {
@@ -38,6 +40,7 @@ const initialState: reducerState = {
   user: JSON.parse(sessionStorage.getItem("user") as string) || {},
   currentChat: {},
   friendDetail: {},
+  groupDetail: {},
 };
 
 export const GlobalStateContext = createContext({} as reducerState);
@@ -46,9 +49,7 @@ export const GlobalProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(AddReducers, initialState);
   // const [hideProfileDrop, setHideProfileDrop] = useState<boolean>(true);
 
-  // console.log("message....", state.showMessages);
-
-  // console.log("tokenss", initialState.accessToken);
+  console.log("message....", state.showMessages);
 
   const getUser = (data: { user: User; accessToken: string }) => {
     dispatch({
@@ -288,7 +289,14 @@ export const GlobalProvider = ({ children }: any) => {
     });
   };
 
-  console.log(state, "state data")
+  const setGroupDetail = (group: any) => {
+    dispatch({
+      type: ActionType.SET_GROUP_DETAIL,
+      payload: group,
+    });
+  };
+
+  console.log(state, "user state");
 
   return (
     <GlobalStateContext.Provider
@@ -313,6 +321,8 @@ export const GlobalProvider = ({ children }: any) => {
         currentChat: state.currentChat,
         setFriendDetail,
         friendDetail: state.friendDetail,
+        setGroupDetail,
+        groupDetail: state.groupDetail,
       }}
     >
       {children}

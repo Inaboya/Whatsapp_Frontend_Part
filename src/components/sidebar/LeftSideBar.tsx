@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import LeftBarFriends from "./LeftBarFriends";
-// import person from "../../assets/photo.png";
+import person from "../../assets/photo.png";
 // import styles from "./LeftSideBar.module.scss";
 import styles from "./LeftSideBar.module.scss";
-// import { BsDashCircleDotted } from "react-icons/bs";
+import { BsDashCircleDotted } from "react-icons/bs";
 import { CgSearchLoading } from "react-icons/cg";
 import { VscChevronDown } from "react-icons/vsc";
 import { IoIosArrowUp } from "react-icons/io";

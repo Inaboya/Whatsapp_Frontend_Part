@@ -6,7 +6,7 @@ import Spinner from "../common/Spinner";
 
 const GroupsData: React.FC = () => {
   const [chat, setChat] = useState("");
-  const { data, getGroups, setShowMessages, startChat, setFriendDetail } =
+  const { data, getGroups, setShowMessages, startChat, setGroupDetail } =
     useContext(GlobalStateContext);
 
   const { groups } = data;
@@ -16,14 +16,15 @@ const GroupsData: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const activeChat = (friendId: string) => {
-    // setChat(friendId);
-    // console.log(friendId, "as group");
-    //   const partner = groups?.friends.filter(
-    //     (active: any) => active._id === friendId
-    //   );
-    //   setFriendDetail!(partner[0].friendId);
-    //   setShowMessages!(true);
+  const activeChat = (groupId: string) => {
+    setChat(groupId);
+
+    const partner = groups?.allgroups.filter(
+      (active: any) => active.id === groupId
+    );
+    console.log("maroooon 5", partner[0]);
+    setGroupDetail!(partner[0]);
+    setShowMessages!(true);
   };
 
   // useEffect(() => {

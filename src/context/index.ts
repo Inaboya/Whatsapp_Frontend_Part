@@ -101,6 +101,11 @@ interface SET_FRIEND {
   payload: any;
 }
 
+interface SET_GROUP_DETAIL {
+  type: typeof ActionType.SET_GROUP_DETAIL;
+  payload: any;
+}
+
 export type Action =
   | GET_FAVORITE_FRIENDS_SUCCESS
   | GET_FAVORITE_FRIENDS_FAILURE
@@ -121,4 +126,5 @@ export type Action =
   | REMOVE_FAVORITE_FRIEND_FAILURE
   | GET_ACTIVE_CHAT
   | GET_ACTIVE_CHAT_FAILURE
-  | SET_FRIEND;
+  | SET_FRIEND
+  | SET_GROUP_DETAIL;

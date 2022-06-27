@@ -12,6 +12,7 @@ interface reducerState {
   showMessages: boolean;
   currentChat: IChat;
   friendDetail: any;
+  groupDetail: any;
 }
 
 const AddReducers = (state: reducerState, action: Action): reducerState => {
@@ -109,6 +110,12 @@ const AddReducers = (state: reducerState, action: Action): reducerState => {
       return {
         ...state,
         friendDetail: action.payload,
+      };
+
+    case ActionType.SET_GROUP_DETAIL:
+      return {
+        ...state,
+        groupDetail: action.payload,
       };
 
     default:
